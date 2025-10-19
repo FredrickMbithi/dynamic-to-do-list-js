@@ -19,10 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Function to add a new task
     function addTask(taskText, save = true) {
-        // If taskText is not provided (user clicked button), get it from input
-        if (taskText === undefined || taskText === true) {
+        // Support being called from event handlers or with explicit text.
+        // If the first argument is not a string (e.g., it's an Event or undefined),
+        // read the value from the input field.
+        if (typeof taskText !== 'string') {
             taskText = taskInput.value.trim();
-            save = true;
         }
         
         // Validate that task is not empty
@@ -74,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
     
     // Add event listener to the "Add Task" button
-    addButton.addEventListener('click', addTask);
+    // Wrap to avoid passing the click event object as the first parameter
+    addButton.addEventListener('click', () => addTask());
     
     // Add event listener for Enter key press in the input field
     taskInput.addEventListener('keypress', (event) => {
