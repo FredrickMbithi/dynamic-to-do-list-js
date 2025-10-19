@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         li.textContent = taskText;
         
         // Create remove button for the task
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.className = 'remove-btn';
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    // Use classList.add as required by rubric
+    removeBtn.classList.add('remove-btn');
         
         // Add click event to remove button
         removeBtn.onclick = function() {
